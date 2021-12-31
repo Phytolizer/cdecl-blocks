@@ -32,54 +32,54 @@ CdeclTokens CdeclTokenize(String text) {
   String token_text = {0};
   LookaheadBuffer lookahead = {0};
   KeywordEntry* keywords = NULL;
-  AddKeyword(&keywords, StringDup("array"), kCdeclTokenTypeArray);
-  AddKeyword(&keywords, StringDup("as"), kCdeclTokenTypeAs);
-  AddKeyword(&keywords, StringDup("cast"), kCdeclTokenTypeCast);
-  AddKeyword(&keywords, StringDup("declare"), kCdeclTokenTypeDeclare);
-  AddKeyword(&keywords, StringDup("exit"), kCdeclTokenTypeExit);
-  AddKeyword(&keywords, StringDup("help"), kCdeclTokenTypeHelp);
-  AddKeyword(&keywords, StringDup("into"), kCdeclTokenTypeInto);
-  AddKeyword(&keywords, StringDup("of"), kCdeclTokenTypeOf);
-  AddKeyword(&keywords, StringDup("explain"), kCdeclTokenTypeExplain);
-  AddKeyword(&keywords, StringDup("function"), kCdeclTokenTypeFunction);
-  AddKeyword(&keywords, StringDup("func"), kCdeclTokenTypeFunction);
-  AddKeyword(&keywords, StringDup("block"), kCdeclTokenTypeBlock);
-  AddKeyword(&keywords, StringDup("member"), kCdeclTokenTypeMember);
-  AddKeyword(&keywords, StringDup("pointer"), kCdeclTokenTypePointer);
-  AddKeyword(&keywords, StringDup("ptr"), kCdeclTokenTypePointer);
-  AddKeyword(&keywords, StringDup("quit"), kCdeclTokenTypeQuit);
-  AddKeyword(&keywords, StringDup("reference"), kCdeclTokenTypeReference);
-  AddKeyword(&keywords, StringDup("ref"), kCdeclTokenTypeReference);
-  AddKeyword(&keywords, StringDup("returning"), kCdeclTokenTypeReturning);
-  AddKeyword(&keywords, StringDup("ret"), kCdeclTokenTypeReturning);
-  AddKeyword(&keywords, StringDup("set"), kCdeclTokenTypeSet);
-  AddKeyword(&keywords, StringDup("to"), kCdeclTokenTypeTo);
-  AddKeyword(&keywords, StringDup("vector"), kCdeclTokenTypeArray);
-  AddKeyword(&keywords, StringDup("auto"), kCdeclTokenTypeAuto);
-  AddKeyword(&keywords, StringDup("character"), kCdeclTokenTypeChar);
-  AddKeyword(&keywords, StringDup("char"), kCdeclTokenTypeChar);
-  AddKeyword(&keywords, StringDup("class"), kCdeclTokenTypeClass);
-  AddKeyword(&keywords, StringDup("constant"), kCdeclTokenTypeConstVolatile);
-  AddKeyword(&keywords, StringDup("const"), kCdeclTokenTypeConstVolatile);
-  AddKeyword(&keywords, StringDup("double"), kCdeclTokenTypeDouble);
-  AddKeyword(&keywords, StringDup("enumeration"), kCdeclTokenTypeEnum);
-  AddKeyword(&keywords, StringDup("enum"), kCdeclTokenTypeEnum);
-  AddKeyword(&keywords, StringDup("external"), kCdeclTokenTypeExtern);
-  AddKeyword(&keywords, StringDup("float"), kCdeclTokenTypeFloat);
-  AddKeyword(&keywords, StringDup("integer"), kCdeclTokenTypeInt);
-  AddKeyword(&keywords, StringDup("int"), kCdeclTokenTypeInt);
-  AddKeyword(&keywords, StringDup("long"), kCdeclTokenTypeLong);
-  AddKeyword(&keywords, StringDup("noalias"), kCdeclTokenTypeConstVolatile);
-  AddKeyword(&keywords, StringDup("register"), kCdeclTokenTypeRegister);
-  AddKeyword(&keywords, StringDup("short"), kCdeclTokenTypeShort);
-  AddKeyword(&keywords, StringDup("signed"), kCdeclTokenTypeSigned);
-  AddKeyword(&keywords, StringDup("static"), kCdeclTokenTypeStatic);
-  AddKeyword(&keywords, StringDup("structure"), kCdeclTokenTypeStruct);
-  AddKeyword(&keywords, StringDup("struct"), kCdeclTokenTypeStruct);
-  AddKeyword(&keywords, StringDup("union"), kCdeclTokenTypeUnion);
-  AddKeyword(&keywords, StringDup("unsigned"), kCdeclTokenTypeUnsigned);
-  AddKeyword(&keywords, StringDup("void"), kCdeclTokenTypeVoid);
-  AddKeyword(&keywords, StringDup("volatile"), kCdeclTokenTypeConstVolatile);
+  AddKeyword(&keywords, StringFromCstr("array"), kCdeclTokenTypeArray);
+  AddKeyword(&keywords, StringFromCstr("as"), kCdeclTokenTypeAs);
+  AddKeyword(&keywords, StringFromCstr("cast"), kCdeclTokenTypeCast);
+  AddKeyword(&keywords, StringFromCstr("declare"), kCdeclTokenTypeDeclare);
+  AddKeyword(&keywords, StringFromCstr("exit"), kCdeclTokenTypeExit);
+  AddKeyword(&keywords, StringFromCstr("help"), kCdeclTokenTypeHelp);
+  AddKeyword(&keywords, StringFromCstr("into"), kCdeclTokenTypeInto);
+  AddKeyword(&keywords, StringFromCstr("of"), kCdeclTokenTypeOf);
+  AddKeyword(&keywords, StringFromCstr("explain"), kCdeclTokenTypeExplain);
+  AddKeyword(&keywords, StringFromCstr("function"), kCdeclTokenTypeFunction);
+  AddKeyword(&keywords, StringFromCstr("func"), kCdeclTokenTypeFunction);
+  AddKeyword(&keywords, StringFromCstr("block"), kCdeclTokenTypeBlock);
+  AddKeyword(&keywords, StringFromCstr("member"), kCdeclTokenTypeMember);
+  AddKeyword(&keywords, StringFromCstr("pointer"), kCdeclTokenTypePointer);
+  AddKeyword(&keywords, StringFromCstr("ptr"), kCdeclTokenTypePointer);
+  AddKeyword(&keywords, StringFromCstr("quit"), kCdeclTokenTypeQuit);
+  AddKeyword(&keywords, StringFromCstr("reference"), kCdeclTokenTypeReference);
+  AddKeyword(&keywords, StringFromCstr("ref"), kCdeclTokenTypeReference);
+  AddKeyword(&keywords, StringFromCstr("returning"), kCdeclTokenTypeReturning);
+  AddKeyword(&keywords, StringFromCstr("ret"), kCdeclTokenTypeReturning);
+  AddKeyword(&keywords, StringFromCstr("set"), kCdeclTokenTypeSet);
+  AddKeyword(&keywords, StringFromCstr("to"), kCdeclTokenTypeTo);
+  AddKeyword(&keywords, StringFromCstr("vector"), kCdeclTokenTypeArray);
+  AddKeyword(&keywords, StringFromCstr("auto"), kCdeclTokenTypeAuto);
+  AddKeyword(&keywords, StringFromCstr("character"), kCdeclTokenTypeChar);
+  AddKeyword(&keywords, StringFromCstr("char"), kCdeclTokenTypeChar);
+  AddKeyword(&keywords, StringFromCstr("class"), kCdeclTokenTypeClass);
+  AddKeyword(&keywords, StringFromCstr("constant"), kCdeclTokenTypeConstVolatile);
+  AddKeyword(&keywords, StringFromCstr("const"), kCdeclTokenTypeConstVolatile);
+  AddKeyword(&keywords, StringFromCstr("double"), kCdeclTokenTypeDouble);
+  AddKeyword(&keywords, StringFromCstr("enumeration"), kCdeclTokenTypeEnum);
+  AddKeyword(&keywords, StringFromCstr("enum"), kCdeclTokenTypeEnum);
+  AddKeyword(&keywords, StringFromCstr("external"), kCdeclTokenTypeExtern);
+  AddKeyword(&keywords, StringFromCstr("float"), kCdeclTokenTypeFloat);
+  AddKeyword(&keywords, StringFromCstr("integer"), kCdeclTokenTypeInt);
+  AddKeyword(&keywords, StringFromCstr("int"), kCdeclTokenTypeInt);
+  AddKeyword(&keywords, StringFromCstr("long"), kCdeclTokenTypeLong);
+  AddKeyword(&keywords, StringFromCstr("noalias"), kCdeclTokenTypeConstVolatile);
+  AddKeyword(&keywords, StringFromCstr("register"), kCdeclTokenTypeRegister);
+  AddKeyword(&keywords, StringFromCstr("short"), kCdeclTokenTypeShort);
+  AddKeyword(&keywords, StringFromCstr("signed"), kCdeclTokenTypeSigned);
+  AddKeyword(&keywords, StringFromCstr("static"), kCdeclTokenTypeStatic);
+  AddKeyword(&keywords, StringFromCstr("structure"), kCdeclTokenTypeStruct);
+  AddKeyword(&keywords, StringFromCstr("struct"), kCdeclTokenTypeStruct);
+  AddKeyword(&keywords, StringFromCstr("union"), kCdeclTokenTypeUnion);
+  AddKeyword(&keywords, StringFromCstr("unsigned"), kCdeclTokenTypeUnsigned);
+  AddKeyword(&keywords, StringFromCstr("void"), kCdeclTokenTypeVoid);
+  AddKeyword(&keywords, StringFromCstr("volatile"), kCdeclTokenTypeConstVolatile);
   // TODO(phyto): Add keywords.
   uint64_t i = 0;
   char keep_char = '\0';
@@ -214,7 +214,7 @@ CdeclTokens CdeclTokenize(String text) {
           if (lookahead.buffer.data[0] == ':') {
             VEC_PUSH(&tokens, ((CdeclToken){
                                   .type = kCdeclTokenTypeDoubleColon,
-                                  .text = StringDup("::"),
+                                  .text = StringFromCstr("::"),
                               }));
             LookFlush(&lookahead);
             i += 2;
@@ -241,7 +241,7 @@ CdeclTokens CdeclTokenize(String text) {
 }
 
 void CdeclTokensCleanup(CdeclTokens* tokens) {
-  for (size_t i = 0; i < tokens->length; ++i) {
+  for (uint64_t i = 0; i < tokens->length; ++i) {
     VEC_FREE(&tokens->data[i].text);
   }
   VEC_FREE(tokens);

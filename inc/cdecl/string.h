@@ -5,4 +5,6 @@
 typedef VEC_TYPE(char) String;
 
 String StringFromChar(char c);
-String StringDup(const char* s);
+String StringFromCstr(const char* s);
+String StringDup(String s);
+String StringConcat(String s1, ...);

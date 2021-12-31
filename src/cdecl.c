@@ -4,7 +4,7 @@
 #include "cdecl/string.h"
 
 int main(int argc, char** argv) {
-  String text = StringDup(
+  String text = StringFromCstr(
       "declare bar as const pointer to array 5 of pointer to function (int) "
       "returning const pointer to char");
   CdeclTokens tokens = CdeclTokenize(text);

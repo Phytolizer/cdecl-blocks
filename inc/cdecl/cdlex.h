@@ -5,58 +5,66 @@
 
 #include "cdecl/string.h"
 
+#define CDECL_TOKEN_TYPE_VARIANTS_ \
+  X(Array)                         \
+  X(As)                            \
+  X(Cast)                          \
+  X(Comma)                         \
+  X(Declare)                       \
+  X(DoubleColon)                   \
+  X(Explain)                       \
+  X(Function)                      \
+  X(Block)                         \
+  X(Help)                          \
+  X(Into)                          \
+  X(Of)                            \
+  X(Member)                        \
+  X(Pointer)                       \
+  X(Reference)                     \
+  X(Returning)                     \
+  X(Set)                           \
+  X(To)                            \
+                                   \
+  X(Char)                          \
+  X(Class)                         \
+  X(ConstVolatile)                 \
+  X(Double)                        \
+  X(Enum)                          \
+  X(Float)                         \
+  X(Int)                           \
+  X(Long)                          \
+  X(Name)                          \
+  X(Number)                        \
+  X(Short)                         \
+  X(Signed)                        \
+  X(Struct)                        \
+  X(Union)                         \
+  X(Unsigned)                      \
+  X(Void)                          \
+  X(Auto)                          \
+  X(Extern)                        \
+  X(Register)                      \
+  X(Static)                        \
+                                   \
+  X(Ampersand)                     \
+  X(Asterisk)                      \
+  X(LeftBracket)                   \
+  X(RightBracket)                  \
+  X(LeftParen)                     \
+  X(RightParen)                    \
+  X(Semicolon)                     \
+  X(Caret)                         \
+  X(Newline)                       \
+  X(Exit)                          \
+  X(Quit)                          \
+                                   \
+  X(Eof)                           \
+  X(Mismatch)
+
 typedef enum {
-  kCdeclTokenTypeArray,
-  kCdeclTokenTypeAs,
-  kCdeclTokenTypeCast,
-  kCdeclTokenTypeComma,
-  kCdeclTokenTypeDeclare,
-  kCdeclTokenTypeDoubleColon,
-  kCdeclTokenTypeExplain,
-  kCdeclTokenTypeFunction,
-  kCdeclTokenTypeBlock,
-  kCdeclTokenTypeHelp,
-  kCdeclTokenTypeInto,
-  kCdeclTokenTypeOf,
-  kCdeclTokenTypeMember,
-  kCdeclTokenTypePointer,
-  kCdeclTokenTypeReference,
-  kCdeclTokenTypeReturning,
-  kCdeclTokenTypeSet,
-  kCdeclTokenTypeTo,
-
-  kCdeclTokenTypeChar,
-  kCdeclTokenTypeClass,
-  kCdeclTokenTypeConstVolatile,
-  kCdeclTokenTypeDouble,
-  kCdeclTokenTypeEnum,
-  kCdeclTokenTypeFloat,
-  kCdeclTokenTypeInt,
-  kCdeclTokenTypeLong,
-  kCdeclTokenTypeName,
-  kCdeclTokenTypeNumber,
-  kCdeclTokenTypeShort,
-  kCdeclTokenTypeSigned,
-  kCdeclTokenTypeStruct,
-  kCdeclTokenTypeUnion,
-  kCdeclTokenTypeUnsigned,
-  kCdeclTokenTypeVoid,
-  kCdeclTokenTypeAuto,
-  kCdeclTokenTypeExtern,
-  kCdeclTokenTypeRegister,
-  kCdeclTokenTypeStatic,
-
-  kCdeclTokenTypeAmpersand,
-  kCdeclTokenTypeAsterisk,
-  kCdeclTokenTypeLeftBracket,
-  kCdeclTokenTypeRightBracket,
-  kCdeclTokenTypeLeftParen,
-  kCdeclTokenTypeRightParen,
-  kCdeclTokenTypeSemicolon,
-  kCdeclTokenTypeCaret,
-  kCdeclTokenTypeNewline,
-  kCdeclTokenTypeExit,
-  kCdeclTokenTypeQuit,
+#define X(x) kCdeclTokenType##x,
+  CDECL_TOKEN_TYPE_VARIANTS_
+#undef X
 } CdeclTokenType;
 
 typedef struct {
