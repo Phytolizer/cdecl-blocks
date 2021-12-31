@@ -19,8 +19,10 @@ CdeclTokens CdeclTokenize(String text) {
         i++;
         keep_char = text.data[i];
       }
-      VEC_PUSH(&tokens,
-               ((CdeclToken){.type = kCdeclTokenTypeName, .text = token_text}));
+      VEC_PUSH(&tokens, ((CdeclToken){
+                            .type = kCdeclTokenTypeName,
+                            .text = token_text,
+                        }));
       // ownership of token_text is transferred to the tokens vector, don't free
       token_text = (String){0};
     }
