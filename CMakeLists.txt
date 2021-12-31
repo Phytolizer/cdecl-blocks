@@ -8,4 +8,5 @@ project(
   HOMEPAGE_URL "https://github.com/Phytolizer/cdecl-blocks"
 )
 
-add_executable(cdecl src/cdecl.c src/cdlex.c src/cdgram.c)
+add_executable(cdecl src/cdecl.c src/cdlex.c src/cdgram.c src/string.c)
+target_include_directories(cdecl PUBLIC inc)

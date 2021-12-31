@@ -1,6 +1,8 @@
 c++decl
 c++decl.dSYM/
-cdecl
+/cdecl
 /cdgram.c
 /cdlex.c
 .cache/
+build/
+.vscode/
