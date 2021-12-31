@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <vec/vec.h>
 
 #include "cdecl/string.h"
 
@@ -51,10 +52,6 @@ typedef struct {
   String text;
 } CdeclToken;
 
-typedef struct {
-  CdeclToken* tokens;
-  uint64_t length;
-  uint64_t capacity;
-} CdeclTokens;
+typedef VEC_TYPE(CdeclToken) CdeclTokens;
 
 CdeclTokens CdeclTokenize(String text);
