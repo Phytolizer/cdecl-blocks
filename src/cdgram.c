@@ -44,6 +44,8 @@ static ParseResult ParseSetStatement(Parser* p);
 static ParseResult ParseNewline(Parser* p);
 static ParseResult ParseOptionalName(Parser* p, String* dest);
 static ParseResult ParseCdecl(Parser* p, String* dest);
+static ParseResult ParseOptionalStorage(Parser* p, String* dest);
+static ParseResult ParseAdecl(Parser* p, Adecl* dest);
 static void PrintWhatWasExpected(CdeclTokenTypes expected, String message);
 
 void CdeclParse(CdeclTokens tokens) {
@@ -274,6 +276,94 @@ inline ParseResult ParseCdecl(Parser* p, String* dest) {
   VEC_PUSH(&p->expected, kCdeclTokenTypeAsterisk);
   VEC_PUSH(&p->expected, kCdeclTokenTypeAmpersand);
   return kParseMismatch;
+}
+
+ParseResult ParseOptionalStorage(Parser* p, String* dest) {
+  if (PARSER_CUR(p) == kCdeclTokenTypeStatic ||
+      PARSER_CUR(p) == kCdeclTokenTypeExtern ||
+      PARSER_CUR(p) == kCdeclTokenTypeRegister ||
+      PARSER_CUR(p) == kCdeclTokenTypeStatic) {
+    *dest = PARSER_DUP_TEXT(p);
+    p->position++;
+  }
+  return kParseOk;
+}
+
+ParseResult ParseAdecl(Parser* p, Adecl* dest) {
+  if (PARSER_CUR(p) == kCdeclTokenTypeFunction) {
+    ++p->position;
+    if (PARSER_CUR(p) == kCdeclTokenTypeReturning) {
+      ++p->position;
+      Adecl adecl = {0};
+      if (ParseAdecl(p, &adecl) != kParseOk) {
+        return kParseMismatch;
+      }
+      *dest = (Adecl){
+          .left = adecl.left,
+          .right = StringConcat(StringFromCstr("()"), adecl.right, (String){0}),
+          .type = adecl.type,
+      };
+      return kParseOk;
+    }
+    if (PARSER_CUR(p) == kCdeclTokenTypeLeftParen) {
+      ++p->position;
+      String adecl_list = {0};
+      if (ParseAdeclList(p, &adecl_list) != kParseOk) {
+        return kParseMismatch;
+      }
+      if (PARSER_CUR(p) != kCdeclTokenTypeRightParen) {
+        VEC_PUSH(&p->expected, kCdeclTokenTypeRightParen);
+        VEC_FREE(&adecl_list);
+        return kParseMismatch;
+      }
+      ++p->position;
+      if (PARSER_CUR(p) != kCdeclTokenTypeReturning) {
+        VEC_PUSH(&p->expected, kCdeclTokenTypeReturning);
+        VEC_FREE(&adecl_list);
+        return kParseMismatch;
+      }
+      ++p->position;
+      Adecl adecl = {0};
+      if (ParseAdecl(p, &adecl) != kParseOk) {
+        VEC_FREE(&adecl_list);
+        return kParseMismatch;
+      }
+      *dest = (Adecl){
+          .left = adecl.left,
+          .type = adecl.type,
+          .right = StringConcat(StringFromCstr("("), adecl_list,
+                                StringFromCstr(")"), adecl.right, (String){0}),
+      };
+      p->prev = 'f';
+      return kParseOk;
+    }
+    VEC_PUSH(&p->expected, kCdeclTokenTypeReturning);
+    VEC_PUSH(&p->expected, kCdeclTokenTypeLeftParen);
+    return kParseMismatch;
+  }
+  if (PARSER_CUR(p) == kCdeclTokenTypeArray) {
+    ++p->position;
+    String adims;
+    if (ParseArrayDimensions(p, &adims) != kParseOk) {
+      return kParseMismatch;
+    }
+    if (PARSER_CUR(p) != kCdeclTokenTypeOf) {
+      VEC_PUSH(&p->expected, kCdeclTokenTypeOf);
+      VEC_FREE(&adims);
+      return kParseMismatch;
+    }
+    ++p->position;
+    Adecl adecl = {0};
+    if (ParseAdecl(p, &adecl) != kParseOk) {
+      VEC_FREE(&adims);
+      return kParseMismatch;
+    }
+    *dest = (Adecl){
+        .left = adecl.left,
+        .type = adecl.type,
+        .right = StringConcat(adims, adecl.right, (String){0}),
+    };
+  }
 }
 
 void PrintWhatWasExpected(CdeclTokenTypes expected, String message) {
