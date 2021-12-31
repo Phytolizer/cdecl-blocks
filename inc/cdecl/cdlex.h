@@ -45,6 +45,16 @@ typedef enum {
   kCdeclTokenTypeExtern,
   kCdeclTokenTypeRegister,
   kCdeclTokenTypeStatic,
+
+  kCdeclTokenTypeAmpersand,
+  kCdeclTokenTypeAsterisk,
+  kCdeclTokenTypeLeftBracket,
+  kCdeclTokenTypeRightBracket,
+  kCdeclTokenTypeLeftParen,
+  kCdeclTokenTypeRightParen,
+  kCdeclTokenTypeSemicolon,
+  kCdeclTokenTypeCaret,
+  kCdeclTokenTypeNewline,
 } CdeclTokenType;
 
 typedef struct {

@@ -10,6 +10,6 @@ project(
 
 add_library(vec src/vec.c)
 target_include_directories(vec PUBLIC inc)
-add_executable(cdecl src/cdecl.c src/cdlex.c src/cdgram.c)
+add_executable(cdecl src/cdecl.c src/cdlex.c src/cdgram.c src/string.c)
 target_include_directories(cdecl PUBLIC inc)
 target_link_libraries(cdecl PUBLIC vec)
