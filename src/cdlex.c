@@ -24,15 +24,15 @@ static bool IsDigit(char c);
 void LookAhead(LookaheadBuffer* buffer, String text, uint64_t index);
 void LookFlush(LookaheadBuffer* buffer);
 void ReportBadCharacter(String text, uint64_t index);
-void AddKeyword(KeywordEntry* keywords, String text, CdeclTokenType type);
+void AddKeyword(KeywordEntry** keywords, String text, CdeclTokenType type);
 
 CdeclTokens CdeclTokenize(String text) {
   CdeclTokens tokens = {0};
   String token_text = {0};
   LookaheadBuffer lookahead = {0};
   KeywordEntry* keywords = NULL;
-  AddKeyword(keywords, StringDup("array"), kCdeclTokenTypeArray);
-  AddKeyword(keywords, StringDup("as"), kCdeclTokenTypeAs);
+  AddKeyword(&keywords, StringDup("array"), kCdeclTokenTypeArray);
+  AddKeyword(&keywords, StringDup("as"), kCdeclTokenTypeAs);
   // TODO(phyto): Add keywords.
   uint64_t i = 0;
   char keep_char = '\0';
@@ -221,12 +221,12 @@ void ReportBadCharacter(String text, uint64_t index) {
   printf("Bad character at index %" PRIu64 ": '%c'\n", index, text.data[index]);
 }
 
-void AddKeyword(KeywordEntry* keywords, String text, CdeclTokenType type) {
+void AddKeyword(KeywordEntry** keywords, String text, CdeclTokenType type) {
   KeywordEntry* entry = malloc(sizeof(KeywordEntry));
   entry->text = malloc(text.length + 1);
   memcpy(entry->text, text.data, text.length);
   entry->text[text.length] = '\0';
   entry->type = type;
-  HASH_ADD_KEYPTR(hh, keywords, entry->text, text.length, entry);
+  HASH_ADD_KEYPTR(hh, *keywords, entry->text, text.length, entry);
   VEC_FREE(&text);
 }
