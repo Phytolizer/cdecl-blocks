@@ -44,10 +44,21 @@ CdeclTokens CdeclTokenize(String text) {
         i++;
         keep_char = text.data[i];
       }
-      VEC_PUSH(&tokens, ((CdeclToken){
-                            .type = kCdeclTokenTypeName,
-                            .text = token_text,
-                        }));
+      VEC_PUSH(&token_text, '\0');
+      KeywordEntry* kw = NULL;
+      HASH_FIND_STR(keywords, token_text.data, kw);
+      VEC_POP(&token_text);
+      if (kw != NULL) {
+        VEC_PUSH(&tokens, ((CdeclToken){
+                              .type = kw->type,
+                              .text = token_text,
+                          }));
+      } else {
+        VEC_PUSH(&tokens, ((CdeclToken){
+                              .type = kCdeclTokenTypeName,
+                              .text = token_text,
+                          }));
+      }
       token_text = (String){0};
     } else if (IsDigit(keep_char)) {
       while (IsDigit(keep_char)) {
