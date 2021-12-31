@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-g",
+      "-O2",
+      "-std=c89",
+      "-o",
+      "c++decl",
+      "cdecl.c"
+    ],
+    "directory": "/home/phyto/Documents/cdecl-blocks",
+    "file": "/home/phyto/Documents/cdecl-blocks/cdecl.c",
+    "output": "/home/phyto/Documents/cdecl-blocks/c++decl"
+  }
+]
