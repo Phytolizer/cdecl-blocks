@@ -6,4 +6,6 @@ CdeclTokens CdeclTokenize(String text) {
   uint64_t i = 0;
   while (i < text.length) {
   }
+
+  return tokens;
 }
