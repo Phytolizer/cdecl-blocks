@@ -172,6 +172,12 @@ CdeclTokens CdeclTokenize(String text) {
     }
   }
 
+  KeywordEntry* kw;
+  KeywordEntry* tmp;
+  HASH_ITER(hh, keywords, kw, tmp) {
+    HASH_DEL(keywords, kw);
+    free(kw);
+  }
   return tokens;
 }
 
