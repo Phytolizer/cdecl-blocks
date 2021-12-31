@@ -55,6 +55,8 @@ typedef enum {
   kCdeclTokenTypeSemicolon,
   kCdeclTokenTypeCaret,
   kCdeclTokenTypeNewline,
+  kCdeclTokenTypeExit,
+  kCdeclTokenTypeQuit,
 } CdeclTokenType;
 
 typedef struct {
@@ -65,3 +67,4 @@ typedef struct {
 typedef VEC_TYPE(CdeclToken) CdeclTokens;
 
 CdeclTokens CdeclTokenize(String text);
+void CdeclTokensCleanup(CdeclTokens* tokens);
